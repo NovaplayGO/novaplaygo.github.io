@@ -1,4 +1,4 @@
-﻿# 🌐 NovaPlay | Sitio Oficial
+# 🌐 NovaPlay | Sitio Oficial
 
 Portal web principal de **NovaPlay**, diseñado para ofrecer una experiencia de usuario premium y acceso directo a la mejor plataforma de entretenimiento digital.
 
@@ -15,5 +15,5 @@ Portal web principal de **NovaPlay**, diseñado para ofrecer una experiencia de 
 Visita el portal en: [https://novaplaytv.github.io/](https://novaplaytv.github.io/)
 
 ---
-**Desarrollado por MSGT**  
+****  
 © 2026 NovaPlay TV.
