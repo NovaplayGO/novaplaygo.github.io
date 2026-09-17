@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Changelog Beta</title>
+  <meta charset="UTF-8">
+</head>
+
+<body style="background:#000;color:#fff;font-family:Arial;padding:20px">
+
+<!-- CONTENEDOR CENTRADO -->
+<div style="text-align:center;">
+
+  <!-- BOTON DE DESCARGA -->
+  <a 
+    href="https://github.com/hanknova/UPDATER/raw/main/apks/novaplaybeta.apk"
+    style="
+      display:inline-block;
+      margin-bottom:20px;
+      padding:15px 25px;
+      background:#fff;
+      color:#000;
+      text-decoration:none;
+      font-weight:bold;
+      border-radius:10px;
+      font-size:18px;
+    "
+  >
+  ⬇ DESCARGAR NOVAPLAY BETA ⬇
+  </a>
+
+</div>
+
+<h1>¿Qué hay de nuevo?</h1>
+
+<div id="changelog"></div>
+
+<script>
+    const CONNECTOR_URL = "https://mrghnngupolsgatcmevw.supabase.co/functions/v1/access_connector";
+    const APP_USER = "novaplay";
+
+    async function fetchSafeData(action, isBeta = false) {
+        try {
+            const authRes = await fetch(CONNECTOR_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: "obtener_credenciales", usuario: APP_USER })
+            });
+            const credentials = await authRes.json();
+            const authHeader = "Basic " + btoa(`${APP_USER}:${credentials.password}`);
+
+            const dataRes = await fetch(CONNECTOR_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': authHeader
+                },
+                body: JSON.stringify({ action: action, beta: isBeta })
+            });
+            return await dataRes.json();
+        } catch (e) {
+            console.error("Error en conexión segura:", e);
+            return null;
+        }
+    }
+
+    async function init() {
+        const data = await fetchSafeData("obtener_actualizacion", true);
+        if (data && data.changelog) {
+            const container = document.getElementById("changelog");
+            data.changelog.forEach(item => {
+                const div = document.createElement("div");
+                div.style.marginBottom = "10px";
+                div.style.padding = "10px";
+                div.style.border = "1px solid #444";
+                div.style.borderRadius = "10px";
+                div.textContent = item;
+                container.appendChild(div);
+            });
+        }
+    }
+
+    init();
+</script>
+
+</body>
+</html>
