@@ -12,7 +12,7 @@ Portal web principal de **NovaPlay**, diseñado para ofrecer una experiencia de 
 
 ## 🚀 Acceso Directo
 
-Visita el portal en: [https://novaplaytv.github.io/](https://novaplaytv.github.io/)
+Visita el portal en: [https://novaplaygo.github.io/](https://novaplaygo.github.io/)
 
 ---
 ****  
