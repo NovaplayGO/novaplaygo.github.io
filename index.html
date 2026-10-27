@@ -191,7 +191,7 @@
             <img src="https://raw.githubusercontent.com/NovaplayGO/novaimg/main/novasplash.webp" alt="Logo" loading="lazy">
             <div style="display: flex; flex-direction: column; line-height: 1;">
                 NOVAPLAY
-                <span id="statusBadge" style="font-size: 8px; font-weight: 800; margin-top: 4px; letter-spacing: 0; opacity: 0.8;">⏳ CARGANDO...</span>
+                <span id="statusBadge" style="font-size: 8px; font-weight: 800; margin-top: 4px; letter-spacing: 0; opacity: 0.8; color: #4caf50;">🟢 OPERATIVO</span>
             </div>
         </a>
 
@@ -380,18 +380,15 @@
 
     // System Status Badge
     async function checkSystemStatus() {
-        const data = await fetchSafeData("obtener_mantenimiento");
         const badge = document.getElementById('statusBadge');
         if (!badge) return;
+        badge.style.color = '#4caf50';
+        badge.innerText = "🟢 OPERATIVO";
 
+        const data = await fetchSafeData("obtener_mantenimiento");
         if (data && data.success === true) {
             badge.style.color = '#ffd700';
-            badge.innerText = "🛠️ Estado: En Mantenimiento";
-        } else if (data) {
-            badge.style.color = '#4caf50';
-            badge.innerText = "🟢 Estado: Operativo";
-        } else {
-            badge.innerText = "🚨 ERROR DE RED";
+            badge.innerText = "🛠️ MANTENIMIENTO";
         }
     }
 
