@@ -6,17 +6,19 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVAPLAY - IPTV</title>
+    <title>NOVAPLAY - IPTV Premium</title>
     <link rel="icon" type="image/webp" href="https://raw.githubusercontent.com/NovaplayGO/novaimg/main/novasplash.webp">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
             --primary: #e50914;
-            --primary-hover: #ff000d;
-            --bg: #050505;
-            --card-bg: #111111;
+            --primary-hover: #ff1e29;
+            --bg: #030303;
+            --card-bg: #0d0d0d;
+            --card-border: rgba(255, 255, 255, 0.08);
             --text: #ffffff;
+            --text-muted: #999999;
             --accent: #ffd700;
             --nav-height: 70px;
         }
@@ -24,8 +26,8 @@
         * { box-sizing: border-box; }
         html, body { margin: 0; padding: 0; background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* Navegación Premium */
-        .nova-nav { position: fixed; top: 0; width: 100%; z-index: 10000; background: rgba(0,0,0,0.7); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        /* Navegación Premium (TOOLBAR INTACTO) */
+        .nova-nav { position: fixed; top: 0; width: 100%; z-index: 10000; background: rgba(3,3,3,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--card-border); transition: 0.3s; }
         .nav-inner { max-width: 1400px; margin: auto; height: 70px; padding: 0 30px; display: flex; align-items: center; justify-content: space-between; }
         .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; font-weight: 900; font-size: 22px; letter-spacing: -1px; z-index: 10001; }
         .nav-brand img { width: 36px; height: 32px; border-radius: 8px; }
@@ -38,11 +40,11 @@
         .btn-login-nav, .btn-logout { background: #e50914; color: #fff !important; font-weight: 800 !important; box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3); border: none; cursor: pointer; padding: 10px 20px; border-radius: 10px; text-decoration: none; font-size: 14px; transition: 0.2s; display: none; }
         .btn-login-nav:hover, .btn-logout:hover { transform: scale(1.05); background: #b91c1c; }
 
-        /* Dropdown de Administración Premium - BLINDAJE TOTAL V4 */
+        /* Dropdown de Administración Premium */
         .admin-menu { position: relative; display: none; align-items: center; height: var(--nav-height); padding: 0 10px; }
         .btn-admin { background: #fff; color: #000; font-weight: 900; border: none; cursor: pointer; padding: 10px 20px; border-radius: 12px; font-size: 13px; display: flex; align-items: center; gap: 10px; transition: 0.2s; position: relative; z-index: 10002; }
         .btn-admin:hover { background: var(--primary); color: #fff; box-shadow: 0 0 20px rgba(229,9,20,0.4); }
-        .dropdown-content { position: absolute; top: 100%; right: 0; background: var(--card-bg); min-width: 280px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; display: none; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.9); z-index: 10001; margin-top: -10px; transition: 0.3s; }
+        .dropdown-content { position: absolute; top: 100%; right: 0; background: var(--card-bg); min-width: 280px; border-radius: 24px; border: 1px solid var(--card-border); overflow: hidden; display: none; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.9); z-index: 10001; margin-top: -10px; transition: 0.3s; }
         .dropdown-content::before { content: ""; position: absolute; top: -30px; left: 0; right: 0; height: 40px; background: transparent; }
         .admin-menu:hover .dropdown-content { display: flex; }
         .dropdown-content a { padding: 15px 20px; color: #fff !important; text-decoration: none !important; font-size: 13px !important; font-weight: 700 !important; border-bottom: 1px solid rgba(255,255,255,0.03); transition: 0.2s; display: flex; align-items: center; gap: 12px; text-align: left; }
@@ -54,84 +56,96 @@
         .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 10px; flex-direction: column; gap: 5px; z-index: 10001; }
         .nav-toggle span { display: block; width: 25px; height: 3px; background: #fff; transition: 0.3s; border-radius: 2px; }
 
-        /* Hero Section */
-        .hero { position: relative; padding: 180px 20px 100px; background: linear-gradient(rgba(0,0,0,0.6), var(--bg)), url('https://raw.githubusercontent.com/NovaplayGO/novaplay/main/banner.jpg'); background-size: cover; background-position: center; text-align: center; display: flex; flex-direction: column; align-items: center; }
-        .hero-logo { width: 120px; margin-bottom: 30px; filter: drop-shadow(0 0 30px rgba(229, 9, 20, 0.5)); animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        /* Hero Section Rediseñado */
+        .hero { position: relative; padding: 160px 20px 100px; background: radial-gradient(circle at 50% 20%, rgba(229,9,20,0.15) 0%, rgba(3,3,3,1) 70%), url('https://raw.githubusercontent.com/NovaplayGO/novaimg/main/banner.jpg'); background-size: cover; background-position: center; text-align: center; display: flex; flex-direction: column; align-items: center; border-bottom: 1px solid var(--card-border); }
+        .hero-glow { position: absolute; top: 100px; width: 300px; height: 300px; background: var(--primary); filter: blur(140px); opacity: 0.2; pointer-events: none; border-radius: 50%; }
+        .hero-logo { width: 110px; height: 110px; object-fit: cover; border-radius: 24px; margin-bottom: 25px; box-shadow: 0 0 40px rgba(229, 9, 20, 0.4); border: 1px solid rgba(255,255,255,0.15); animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-        h1 { font-size: clamp(40px, 8vw, 70px); font-weight: 900; margin: 0; letter-spacing: -2px; line-height: 1.1; }
-        .tagline { font-size: clamp(16px, 2.5vw, 20px); color: #bbb; max-width: 700px; margin: 25px auto 40px; line-height: 1.6; font-weight: 400; }
+        h1 { font-size: clamp(38px, 7vw, 68px); font-weight: 900; margin: 0; letter-spacing: -2px; line-height: 1.1; }
+        .hero-title-accent { background: linear-gradient(135deg, #fff 40%, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .tagline { font-size: clamp(15px, 2.2vw, 19px); color: var(--text-muted); max-width: 680px; margin: 20px auto 35px; line-height: 1.6; font-weight: 400; }
 
-        .cta-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; align-items: center; width: 100%; max-width: 800px; }
-        .btn-download { background: var(--primary); color: #fff; padding: 20px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 18px; box-shadow: 0 10px 30px rgba(229, 9, 20, 0.4); transition: 0.3s; min-width: 250px; }
-        .btn-download:hover { transform: scale(1.05); background: var(--primary-hover); }
+        .cta-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; align-items: center; width: 100%; max-width: 900px; margin-top: 10px; }
+        .btn-download { background: var(--primary); color: #fff; padding: 18px 36px; border-radius: 16px; text-decoration: none; font-weight: 800; font-size: 16px; box-shadow: 0 10px 30px rgba(229, 9, 20, 0.35); transition: 0.3s; min-width: 220px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .btn-download:hover { transform: translateY(-3px); background: var(--primary-hover); box-shadow: 0 15px 40px rgba(229, 9, 20, 0.5); }
+        .btn-secondary { background: rgba(255, 255, 255, 0.06); color: #fff; border: 1px solid var(--card-border); }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.2); }
 
-        .downloader-box { background: rgba(255,255,255,0.05); border: 2px dashed var(--accent); padding: 15px 30px; border-radius: 20px; backdrop-filter: blur(10px); }
-        .dl-title { font-size: 11px; text-transform: uppercase; color: var(--accent); letter-spacing: 2px; font-weight: 800; }
-        .dl-code { font-size: 28px; font-family: monospace; font-weight: 900; margin-top: 5px; color: #fff; }
+        .downloader-box { background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(255, 215, 0, 0.3); padding: 12px 25px; border-radius: 16px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .dl-title { font-size: 10px; text-transform: uppercase; color: var(--accent); letter-spacing: 2px; font-weight: 800; }
+        .dl-code { font-size: 24px; font-family: monospace; font-weight: 900; margin-top: 2px; color: #fff; letter-spacing: 1px; }
 
-        /* Installation Guide */
-        .guide-section { padding: 100px 20px; max-width: 1200px; margin: auto; text-align: center; }
-        .guide-section h2 { font-size: clamp(32px, 5vw, 40px); font-weight: 900; margin-bottom: 60px; text-transform: uppercase; letter-spacing: -1px; }
-        .guide-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
-        .step-card { background: #0c0c0c; padding: 50px 40px; border-radius: 30px; border: 1px solid #1a1a1a; position: relative; transition: 0.3s; }
-        .step-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .step-number { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4); }
-        .step-icon { font-size: 50px; margin-bottom: 25px; display: block; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1)); }
-        .step-card h3 { margin-bottom: 15px; font-size: 22px; font-weight: 800; }
-        .step-card p { color: #888; font-size: 15px; line-height: 1.6; }
+        /* Device Mockup Showcase Section Rediseñado */
+        .showcase-section { padding: 90px 20px; background: linear-gradient(to bottom, var(--bg), #080808); display: flex; justify-content: center; align-items: center; border-bottom: 1px solid var(--card-border); }
+        .showcase-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 50px; max-width: 1250px; width: 100%; }
 
-        /* Features */
-        .features { padding: 80px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); max-width: 1200px; margin: auto; gap: 30px; }
-        .f-card { background: var(--card-bg); padding: 40px; border-radius: 30px; text-align: left; border: 1px solid rgba(255,255,255,0.05); transition: 0.4s; }
-        .f-card:hover { transform: translateY(-15px); border-color: var(--primary); background: #161616; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .f-icon { font-size: 40px; margin-bottom: 20px; display: block; }
-        .f-card h3 { font-size: 22px; margin: 0 0 15px; color: #fff; }
-        .f-card p { color: #888; line-height: 1.6; font-size: 15px; margin: 0; }
-
-        /* Device Mockup Showcase Section */
-        .showcase-section { padding: 80px 20px; background: var(--bg); display: flex; justify-content: center; align-items: center; }
-        .showcase-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 60px; max-width: 1300px; width: 100%; }
-
-        /* TV Mockup Frame */
-        .tv-mockup { position: relative; width: 100%; max-width: 650px; background: #1a1a1a; border-radius: 16px; padding: 16px 16px 24px; box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(229,9,20,0.1); border: 2px solid #333; }
-        .tv-screen { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; border: 1px solid #111; }
+        /* TV Mockup Frame Ultra Realista */
+        .tv-mockup { position: relative; width: 100%; max-width: 620px; background: linear-gradient(135deg, #1c1c1c, #111); border-radius: 18px; padding: 14px 14px 22px; box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 50px rgba(229,9,20,0.12); border: 1px solid rgba(255,255,255,0.12); transition: 0.4s; }
+        .tv-mockup:hover { transform: translateY(-6px); box-shadow: 0 50px 120px rgba(0,0,0,0.9), 0 0 60px rgba(229,9,20,0.2); }
+        .tv-screen { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 10px; overflow: hidden; border: 1px solid #222; }
         .tv-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .tv-base { width: 160px; height: 14px; background: linear-gradient(to bottom, #222, #111); margin: 12px auto 0; border-radius: 4px; border: 1px solid #333; }
-        .tv-stand { width: 80px; height: 8px; background: #111; margin: 0 auto; border-radius: 2px; }
+        .tv-base { width: 150px; height: 12px; background: linear-gradient(to bottom, #2a2a2a, #151515); margin: 12px auto 0; border-radius: 6px; border: 1px solid #333; }
+        .tv-stand { width: 70px; height: 6px; background: #0a0a0a; margin: 0 auto; border-radius: 3px; }
 
-        /* Phone Mockup Frame */
-        .phone-mockup { position: relative; width: 100%; max-width: 280px; background: #1a1a1a; border-radius: 40px; padding: 14px; box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(229,9,20,0.1); border: 3px solid #333; }
-        .phone-screen { width: 100%; aspect-ratio: 9 / 19.5; background: #000; border-radius: 30px; overflow: hidden; position: relative; border: 1px solid #111; }
-        .phone-screen::before { content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 90px; height: 16px; background: #111; border-radius: 10px; z-index: 10; }
+        /* Phone Mockup Frame Ultra Realista */
+        .phone-mockup { position: relative; width: 100%; max-width: 270px; background: linear-gradient(135deg, #1c1c1c, #111); border-radius: 42px; padding: 12px; box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 50px rgba(229,9,20,0.12); border: 1px solid rgba(255,255,255,0.12); transition: 0.4s; }
+        .phone-mockup:hover { transform: translateY(-6px); box-shadow: 0 50px 120px rgba(0,0,0,0.9), 0 0 60px rgba(229,9,20,0.2); }
+        .phone-screen { width: 100%; aspect-ratio: 9 / 19.5; background: #000; border-radius: 32px; overflow: hidden; position: relative; border: 1px solid #222; }
+        .phone-screen::before { content: ""; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 84px; height: 16px; background: #0a0a0a; border-radius: 12px; z-index: 10; border: 1px solid rgba(255,255,255,0.05); }
         .phone-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        @media (max-width: 768px) {
-            .showcase-container { gap: 40px; }
-            .tv-mockup { max-width: 100%; }
-            .phone-mockup { max-width: 240px; }
-        }
+        /* Installation Guide Rediseñado */
+        .guide-section { padding: 100px 20px; max-width: 1200px; margin: auto; text-align: center; }
+        .section-title { font-size: clamp(28px, 4.5vw, 38px); font-weight: 900; margin-bottom: 12px; text-transform: uppercase; letter-spacing: -1px; }
+        .section-subtitle { color: var(--text-muted); font-size: 16px; max-width: 600px; margin: 0 auto 60px; line-height: 1.6; }
+        .guide-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .step-card { background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(8,8,8,0.9)); padding: 45px 35px; border-radius: 24px; border: 1px solid var(--card-border); position: relative; transition: 0.3s; text-align: left; }
+        .step-card:hover { border-color: var(--primary); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .step-number-badge { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; background: rgba(229,9,20,0.1); color: var(--primary); font-weight: 900; font-size: 18px; border-radius: 12px; margin-bottom: 25px; border: 1px solid rgba(229,9,20,0.2); }
+        .step-card h3 { margin: 0 0 12px; font-size: 20px; font-weight: 800; color: #fff; }
+        .step-card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin: 0; }
 
-        /* FAQ Section */
-        .faq-section { padding: 100px 20px; max-width: 800px; margin: auto; }
-        .faq-section h2 { text-align: center; font-size: clamp(32px, 5vw, 40px); font-weight: 900; margin-bottom: 50px; text-transform: uppercase; }
-        .faq-item { background: #0c0c0c; border-radius: 20px; margin-bottom: 15px; border: 1px solid #1a1a1a; overflow: hidden; transition: 0.3s; }
-        .faq-question { padding: 25px 30px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 18px; transition: 0.3s; }
-        .faq-question:hover { background: #111; }
-        .faq-question::after { content: '+'; font-size: 24px; color: var(--primary); transition: 0.3s; font-weight: 400; }
-        .faq-item.active { border-color: var(--primary); }
+        /* Features Rediseñado */
+        .features { padding: 80px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); max-width: 1200px; margin: auto; gap: 30px; }
+        .f-card { background: linear-gradient(145deg, rgba(15,15,15,0.8), rgba(8,8,8,0.8)); padding: 40px; border-radius: 24px; text-align: left; border: 1px solid var(--card-border); transition: 0.3s; }
+        .f-card:hover { transform: translateY(-8px); border-color: var(--primary); background: #121212; box-shadow: 0 25px 50px rgba(0,0,0,0.7); }
+        .f-icon-box { width: 56px; height: 56px; background: rgba(229,9,20,0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--primary); margin-bottom: 25px; border: 1px solid rgba(229,9,20,0.2); }
+        .f-card h3 { font-size: 20px; margin: 0 0 12px; color: #fff; font-weight: 800; }
+        .f-card p { color: var(--text-muted); line-height: 1.6; font-size: 14px; margin: 0; }
+
+        /* Changelog Rediseñado */
+        .changelog { max-width: 1000px; margin: 40px auto 100px; padding: 0 20px; text-align: left; }
+        .changelog-box { background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(8,8,8,0.9)); border: 1px solid var(--card-border); border-radius: 28px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .version-tag { display: inline-block; background: rgba(255,215,0,0.1); color: var(--accent); padding: 6px 16px; border-radius: 10px; font-size: 13px; font-weight: 800; margin-bottom: 20px; border: 1px solid rgba(255,215,0,0.2); }
+        .changelog h2 { font-size: 28px; font-weight: 900; margin: 0 0 30px; color: #fff; }
+        .change-item { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); padding: 16px 20px; border-radius: 14px; margin-bottom: 12px; font-size: 15px; display: flex; align-items: center; gap: 14px; transition: 0.2s; color: #ddd; }
+        .change-item:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.08); }
+        .change-item::before { content: "•"; color: var(--primary); font-weight: 900; font-size: 18px; }
+
+        /* FAQ Section Rediseñado */
+        .faq-section { padding: 90px 20px; max-width: 900px; margin: auto; }
+        .faq-item { background: linear-gradient(145deg, rgba(15,15,15,0.8), rgba(8,8,8,0.8)); border-radius: 20px; margin-bottom: 16px; border: 1px solid var(--card-border); overflow: hidden; transition: 0.3s; }
+        .faq-question { padding: 22px 28px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 17px; transition: 0.3s; color: #fff; }
+        .faq-question:hover { background: rgba(255,255,255,0.02); }
+        .faq-question::after { content: '+'; font-size: 22px; color: var(--primary); transition: 0.3s; font-weight: 400; }
+        .faq-item.active { border-color: var(--primary); background: rgba(229,9,20,0.03); }
         .faq-item.active .faq-question { color: var(--primary); }
         .faq-item.active .faq-question::after { transform: rotate(45deg); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 0 30px; color: #888; line-height: 1.7; font-size: 16px; }
-        .faq-item.active .faq-answer { max-height: 300px; padding: 0 30px 30px; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); padding: 0 28px; color: var(--text-muted); line-height: 1.7; font-size: 15px; }
+        .faq-item.active .faq-answer { max-height: 300px; padding: 0 28px 25px; }
+
+        /* Footer Rediseñado */
+        footer { padding: 60px 20px; background: #020202; border-top: 1px solid var(--card-border); text-align: center; }
+        .footer-text { font-size: 13px; color: #555; line-height: 1.8; font-weight: 600; }
 
         /* NovaModal Premium */
         .nova-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 20000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .nova-modal { background: var(--card-bg); border: 1px solid var(--border); border-radius: 30px; width: 100%; max-width: 450px; padding: 40px; box-shadow: 0 25px 60px rgba(0,0,0,0.6); text-align: center; animation: modal-in 0.3s ease-out; }
+        .nova-modal { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 30px; width: 100%; max-width: 450px; padding: 40px; box-shadow: 0 25px 60px rgba(0,0,0,0.6); text-align: center; animation: modal-in 0.3s ease-out; }
         @keyframes modal-in { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .nova-modal h3 { font-size: 22px; font-weight: 900; margin-bottom: 15px; text-transform: uppercase; }
-        .nova-modal p { color: #888; font-size: 15px; margin-bottom: 25px; line-height: 1.5; }
-        .nova-modal input { width: 100%; padding: 15px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; color: #fff; margin-bottom: 20px; font-size: 15px; }
+        .nova-modal p { color: var(--text-muted); font-size: 15px; margin-bottom: 25px; line-height: 1.5; }
+        .nova-modal input { width: 100%; padding: 15px; background: var(--bg); border: 1px solid var(--card-border); border-radius: 14px; color: #fff; margin-bottom: 20px; font-size: 15px; }
         .nova-modal-btns { display: flex; gap: 12px; }
         .nova-modal-btn { flex: 1; padding: 15px; border-radius: 14px; border: 0; font-weight: 800; cursor: pointer; transition: 0.2s; }
         .btn-confirm { background: var(--primary); color: #fff; }
@@ -140,41 +154,29 @@
 
         .hidden { display: none !important; }
 
-        .changelog { max-width: 900px; margin: 0 auto 100px; padding: 0 20px; text-align: left; }
-        .changelog h2 { font-size: 32px; font-weight: 900; border-left: 6px solid var(--primary); padding-left: 20px; margin-bottom: 40px; }
-        .version-tag { display: inline-block; background: #222; color: var(--accent); padding: 6px 15px; border-radius: 10px; font-size: 14px; font-weight: 800; margin-bottom: 20px; }
-
-        .change-item { background: #0c0c0c; border: 1px solid #1a1a1a; padding: 18px 25px; border-radius: 15px; margin-bottom: 15px; font-size: 16px; display: flex; align-items: center; gap: 15px; transition: 0.2s; }
-        .change-item:hover { background: #111; border-color: #333; }
-        .change-item::before { content: "•"; color: var(--primary); font-weight: 900; }
-
-        footer { padding: 60px 20px; background: #000; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
-        .footer-text { font-size: 13px; color: #444; line-height: 1.8; font-weight: 600; }
-
         /* NovaToast Styles */
         #nova-toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 30000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
-        .nova-toast { background: #1a1a1a; color: #fff; padding: 15px 25px; border-radius: 12px; border-left: 5px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; min-width: 280px; pointer-events: auto; animation: toast-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; transition: 0.3s; }
+        .nova-toast { background: #151515; color: #fff; padding: 16px 24px; border-radius: 14px; border-left: 5px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.6); display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 14px; min-width: 280px; pointer-events: auto; animation: toast-in 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; transition: 0.3s; border-top: 1px solid var(--card-border); border-right: 1px solid var(--card-border); border-bottom: 1px solid var(--card-border); }
         .nova-toast.fade-out { opacity: 0; transform: translateX(100px); }
         @keyframes toast-in { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-        /* Responsividad Mejorada */
+        /* Responsividad Móvil Optimizada */
         @media (max-width: 900px) {
             .nav-inner { padding: 0 15px; }
             .nav-toggle { display: flex; }
             .nav-links {
                 position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-                background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(20px);
+                background: rgba(3, 3, 3, 0.98); backdrop-filter: blur(25px);
                 flex-direction: column; justify-content: flex-start; align-items: center;
-                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); gap: 15px; padding: 100px 40px 40px;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); gap: 15px; padding: 100px 30px 40px;
                 overflow-y: auto;
             }
             .nav-links.active { right: 0; }
-            .nav-links a { font-size: 18px; width: 100%; text-align: center; padding: 15px; border-radius: 15px; }
+            .nav-links a { font-size: 18px; width: 100%; text-align: center; padding: 15px; border-radius: 14px; }
 
-            /* Ajuste del botón PANEL en móvil */
             .admin-menu { width: 100%; height: auto; justify-content: center; padding: 0; flex-direction: column; }
-            .btn-admin { width: 100%; justify-content: center; padding: 18px; font-size: 16px; border-radius: 15px; }
-            .dropdown-content { position: relative; width: 100%; top: 0; margin-top: 10px; opacity: 0; visibility: hidden; display: none; transform: none; box-shadow: none; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+            .btn-admin { width: 100%; justify-content: center; padding: 18px; font-size: 16px; border-radius: 14px; }
+            .dropdown-content { position: relative; width: 100%; top: 0; margin-top: 10px; opacity: 0; visibility: hidden; display: none; transform: none; box-shadow: none; background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); }
             .admin-menu.active .dropdown-content { opacity: 1; visibility: visible; display: flex; }
             .dropdown-content a { padding: 15px; font-size: 14px !important; }
 
@@ -182,10 +184,14 @@
             .nav-toggle.active span:nth-child(2) { opacity: 0; }
             .nav-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
-            h1 { font-size: 40px; }
+            h1 { font-size: 34px; }
             .hero { padding-top: 140px; }
-            .cta-container { flex-direction: column; }
+            .cta-container { flex-direction: column; gap: 14px; }
             .btn-download { width: 100%; text-align: center; }
+            .downloader-box { width: 100%; text-align: center; }
+            .showcase-container { gap: 40px; }
+            .tv-mockup { max-width: 100%; }
+            .phone-mockup { max-width: 240px; }
             #nova-toast-container { right: 10px; left: 10px; bottom: 10px; }
             .nova-toast { min-width: auto; }
         }
@@ -244,45 +250,21 @@
 </nav>
 
 <section class="hero">
+    <div class="hero-glow"></div>
     <img src="https://raw.githubusercontent.com/NovaplayGO/novaimg/main/novasplash.webp" alt="NovaPlay Logo" class="hero-logo" loading="lazy">
-    <h1 id="hero-title">ENTRETENIMIENTO<br><span style="color:var(--primary)">SIN LÍMITES.</span></h1>
+    <h1 id="hero-title">ENTRETENIMIENTO<br><span class="hero-title-accent">SIN LÍMITES.</span></h1>
     <p class="tagline" id="hero-tagline">La plataforma de IPTV más robusta, optimizada para Smart TVs y dispositivos con bajos recursos. Experimenta la máxima fluidez.</p>
 
-    <div class="cta-container" style="max-width: 1000px;">
-        <a href="https://novaplaygo.github.io/NovaApps/" class="btn-download" id="btn-store" style="background: #fff; color: #000; flex: 1; min-width: 200px; white-space: nowrap;">
-            CENTRO DE DESCARGAS
+    <div class="cta-container">
+        <a href="https://novaplaygo.github.io/NovaApps/" class="btn-download btn-secondary" id="btn-store">
+            <i class="fas fa-store"></i> CENTRO DE DESCARGAS
         </a>
-        <a href="https://github.com/hanknova/UPDATER/raw/main/apks/novaplay.apk" class="btn-download" id="btn-download" style="flex: 1; min-width: 200px; white-space: nowrap;">
-            APK ESTABLE
+        <a href="https://github.com/hanknova/UPDATER/raw/main/apks/novaplay.apk" class="btn-download" id="btn-download">
+            <i class="fas fa-download"></i> APK ESTABLE
         </a>
-        <div class="downloader-box" style="flex: 0 1 auto; min-width: 200px; white-space: nowrap;">
+        <div class="downloader-box">
             <div class="dl-title" id="dl-title">DOWNLOADER CODE</div>
             <div class="dl-code">4190861</div>
-        </div>
-    </div>
-</section>
-
-<!-- Visual Installation Guide -->
-<section class="guide-section">
-    <h2 id="guide-title">INSTALACIÓN EN 3 PASOS</h2>
-    <div class="guide-steps">
-        <div class="step-card">
-            <div class="step-number">1</div>
-            <span class="step-icon">📥</span>
-            <h3 id="step1-title">Descargar Downloader</h3>
-            <p id="step1-desc">Busca e instala la app 'Downloader' desde la tienda de aplicaciones de tu Fire TV o Android TV.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-number">2</div>
-            <span class="step-icon">🔢</span>
-            <h3 id="step2-title">Ingresar el Código</h3>
-            <p id="step2-desc">Abre Downloader y escribe el código 4190861 en la barra de búsqueda para iniciar la descarga.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-number">3</div>
-            <span class="step-icon">🚀</span>
-            <h3 id="step3-title">Instalar y Acceder</h3>
-            <p id="step3-desc">Abre el archivo descargado, completa la instalación y coloca tu cuenta para acceder a la app.</p>
         </div>
     </div>
 </section>
@@ -308,61 +290,87 @@
     </div>
 </section>
 
+<!-- Visual Installation Guide -->
+<section class="guide-section">
+    <h2 class="section-title" id="guide-title">INSTALACIÓN EN 3 PASOS</h2>
+    <p class="section-subtitle">Sigue estos sencillos pasos para comenzar a disfrutar de todo el contenido en tu Smart TV o dispositivo compatible.</p>
+    <div class="guide-steps">
+        <div class="step-card">
+            <div class="step-number-badge">01</div>
+            <h3 id="step1-title">Descargar Downloader</h3>
+            <p id="step1-desc">Busca e instala la app 'Downloader' desde la tienda oficial de aplicaciones de tu Fire TV o Android TV.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number-badge">02</div>
+            <h3 id="step2-title">Ingresar el Código</h3>
+            <p id="step2-desc">Abre la aplicación Downloader e introduce el código 4190861 en la barra de búsqueda para iniciar.</p>
+        </div>
+        <div class="step-card">
+            <div class="step-number-badge">03</div>
+            <h3 id="step3-title">Instalar y Acceder</h3>
+            <p id="step3-desc">Completa la instalación del APK descargado, ingresa con tu cuenta y accede al mejor entretenimiento.</p>
+        </div>
+    </div>
+</section>
+
 <section class="features">
     <div class="f-card">
-        <span class="f-icon">⚡</span>
+        <div class="f-icon-box"><i class="fas fa-bolt"></i></div>
         <h3 id="f1-title">Ligera y Rápida</h3>
-        <p id="f1-desc">Aplicación optimizada para funcionar con fluidez en cualquier TV Box o Firestick, consumiendo el mínimo de recursos del sistema.</p>
+        <p id="f1-desc">Optimizada al máximo para funcionar con total fluidez en cualquier TV Box o Firestick, consumiendo mínimos recursos.</p>
     </div>
     <div class="f-card">
-        <span class="f-icon">🛡️</span>
+        <div class="f-icon-box"><i class="fas fa-shield-alt"></i></div>
         <h3 id="f2-title">Máxima Estabilidad</h3>
-        <p id="f2-desc">Acceso directo a señales optimizadas para evitar cortes constantes y ofrecer una experiencia de visualización continua.</p>
+        <p id="f2-desc">Conexión directa a servidores estables para evitar cortes molestos y garantizar una reproducción continua.</p>
     </div>
     <div class="f-card">
-        <span class="f-icon">📺</span>
-        <h3 id="f3-title">Hecho para TV</h3>
-        <p id="f3-desc">Interfaz intuitiva con control total desde el mando a distancia. Zapping rápido y navegación fluida en 4K.</p>
+        <div class="f-icon-box"><i class="fas fa-tv"></i></div>
+        <h3 id="f3-title">Diseñada para TV</h3>
+        <p id="f3-desc">Interfaz intuitiva pensada para el control remoto con zapping ultrarrápido y navegación en alta definición.</p>
     </div>
 </section>
 
 <div class="changelog">
-    <div id="version-badge" class="version-tag">Cargando versión...</div>
-    <h2 id="changelog-title">Novedades de la Versión</h2>
-    <div id="changelog-items">
-        <!-- Cargando dinámicamente... -->
+    <div class="changelog-box">
+        <div id="version-badge" class="version-tag">Cargando versión...</div>
+        <h2 id="changelog-title">Novedades de la Versión</h2>
+        <div id="changelog-items">
+            <!-- Cargando dinámicamente... -->
+        </div>
     </div>
 </div>
 
 <!-- FAQ Section -->
 <section class="faq-section">
-    <h2 id="faq-title">Preguntas Frecuentes</h2>
+    <h2 class="section-title" id="faq-title" style="text-align: center; margin-bottom: 12px;">PREGUNTAS FRECUENTES</h2>
+    <p class="section-subtitle" style="text-align: center;">Resolvemos tus dudas sobre la instalación y funcionamiento de la plataforma.</p>
 
     <div class="faq-item">
         <div class="faq-question" id="q1">¿Qué es NovaPlay?</div>
-        <div class="faq-answer" id="a1">NovaPlay es una aplicación de entretenimiento premium diseñada para ofrecer la mejor experiencia de streaming con una interfaz optimizada para televisores.</div>
+        <div class="faq-answer" id="a1">NovaPlay es una plataforma de entretenimiento avanzada, diseñada para ofrecer streaming en vivo con calidad superior y una interfaz optimizada para Smart TVs.</div>
     </div>
 
     <div class="faq-item">
-        <div class="faq-question" id="q2">¿Cómo puedo instalarlo?</div>
-        <div class="faq-answer" id="a2">La forma más sencilla es usar el código 4190861 en la aplicación Downloader, o descargar el APK directamente desde el botón superior.</div>
+        <div class="faq-question" id="q2">¿Cómo puedo instalarlo en mi Fire TV?</div>
+        <div class="faq-answer" id="a2">Utiliza la aplicación 'Downloader' e ingresa el código numérico 4190861. La descarga e instalación se realizarán de forma automática.</div>
     </div>
 
     <div class="faq-item">
-        <div class="faq-question" id="q3">¿Tienen problemas de buffering?</div>
-        <div class="faq-answer" id="a3">El rendimiento depende directamente de tu conexión a internet. Para evitar cortes, recomendamos usar una conexión estable de al menos 10Mbps y, de ser posible, conectar tu dispositivo por cable.</div>
+        <div class="faq-question" id="q3">¿Qué velocidad de internet necesito?</div>
+        <div class="faq-answer" id="a3">Recomendamos una conexión estable de al menos 10 Mbps para una reproducción fluida en alta definición. Si es posible, conecta tu dispositivo por cable Ethernet.</div>
     </div>
 
     <div class="faq-item">
-        <div class="faq-question" id="q4">¿En qué dispositivos funciona?</div>
-        <div class="faq-answer" id="a4">Es compatible con Fire TV Stick, Xiaomi Mi Box/Stick, Chromecast con Google TV, Smart TVs con Android TV y dispositivos móviles Android.</div>
+        <div class="faq-question" id="q4">¿En qué dispositivos es compatible?</div>
+        <div class="faq-answer" id="a4">Es compatible con Amazon Fire TV Stick, TV Boxes Android, Google TV, Smart TVs y dispositivos móviles Android.</div>
     </div>
 </section>
 
 <footer>
     <div class="footer-text">
-        © 2026 NOVAPLAY TV<br>
-        © 2010 - 2026 - NOVAPLAY TV. TODOS LOS DERECHOS RESERVADOS
+        © 2026 NOVAPLAY TV. TODOS LOS DERECHOS RESERVADOS.<br>
+        PLATAFORMA DE STREAMING IPTV DE ALTO RENDIMIENTO
     </div>
 </footer>
 
@@ -494,6 +502,7 @@
     }
 
     loadChangelog();
+    checkSystemStatus();
 
     // Toggle Menú Móvil
     const navToggle = document.getElementById('navToggle');
@@ -526,31 +535,11 @@
         });
     });
 
-    // Lógica de Modal Demo
-    const modal = document.getElementById('demoModal');
-    document.getElementById('demo-link').addEventListener('click', e => {
-        e.preventDefault();
-        modal.classList.add('active');
-    });
-
-    function cerrarModal() { modal.classList.remove('active'); }
-
-    function lanzarDemo() {
-        const url = '#';
-        const win = window.open(url, '_blank');
-        if (win) {
-            cerrarModal();
-            novaToast("Iniciando NovaSports...", "success");
-        } else {
-            novaToast("Pop-up bloqueado. Por favor, permite ventanas emergentes.", "error");
-        }
-    }
-
     // Efecto Scroll Nav
     window.addEventListener('scroll', () => {
         const nav = document.querySelector('.nova-nav');
-        if (window.scrollY > 50) nav.style.background = "rgba(5,5,5,0.95)";
-        else nav.style.background = "rgba(0,0,0,0.7)";
+        if (window.scrollY > 50) nav.style.background = "rgba(3,3,3,0.95)";
+        else nav.style.background = "rgba(3,3,3,0.85)";
     });
 
     // Session Visibility
@@ -567,38 +556,17 @@
             if (adminMenu) adminMenu.style.display = 'none';
         }
     }
-
     actualizarSesion();
 
     function cerrarSesion() {
-        openModal("Cerrar Sesión", "¿Estás seguro que deseas salir de NovaPlay?", () => {
-            localStorage.removeItem("novaimg_session_token");
-            localStorage.removeItem("novaplay_session_token");
-            novaToast("Sesión cerrada correctamente", "info");
-            setTimeout(() => location.reload(), 1500);
-        });
+        localStorage.removeItem("novaimg_session_token");
+        localStorage.removeItem("novaplay_session_token");
+        localStorage.removeItem("novaimg_user");
+        localStorage.removeItem("novaplay_user");
+        actualizarSesion();
+        novaToast("Sesión cerrada correctamente", "success");
+        setTimeout(() => location.reload(), 1000);
     }
-
-    /* NovaModal Premium - Light Version for Landing */
-    function openModal(title, msg, onConfirm) {
-        const m = document.getElementById("novaModal");
-        if (!m) return;
-        document.getElementById("novaModalTitle").innerText = title;
-        document.getElementById("novaModalMessage").innerText = msg;
-
-        m.style.display = "flex";
-
-        const close = () => { m.style.display = "none"; };
-        document.getElementById("novaModalCancel").onclick = close;
-        document.getElementById("novaModalConfirm").onclick = () => {
-            onConfirm();
-            close();
-        };
-    }
-
-    // Initial check
-    checkSystemStatus();
 </script>
-
-</body> 
+</body>
 </html>
