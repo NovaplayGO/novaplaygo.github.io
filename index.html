@@ -89,21 +89,28 @@
         .f-card h3 { font-size: 22px; margin: 0 0 15px; color: #fff; }
         .f-card p { color: #888; line-height: 1.6; font-size: 15px; margin: 0; }
 
-        /* Device Showcase Section */
-        .showcase-section { padding: 80px 20px; max-width: 1200px; margin: auto; text-align: center; }
-        .showcase-title { font-size: clamp(32px, 5vw, 40px); font-weight: 900; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -1px; }
-        .showcase-subtitle { color: #888; font-size: 16px; max-width: 650px; margin: 0 auto 60px; line-height: 1.6; }
-        .showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: center; }
-        .device-card { background: #0c0c0c; border: 1px solid rgba(255,255,255,0.05); border-radius: 30px; padding: 30px; transition: 0.3s; position: relative; overflow: hidden; }
-        .device-card:hover { border-color: var(--primary); transform: translateY(-8px); box-shadow: 0 20px 50px rgba(229, 9, 20, 0.15); }
-        .device-frame { border-radius: 20px; overflow: hidden; background: #000; border: 2px solid rgba(255,255,255,0.1); margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .device-frame img { width: 100%; height: auto; display: block; transition: 0.4s; }
-        .device-card:hover .device-frame img { transform: scale(1.03); }
-        .tv-frame img { aspect-ratio: 16 / 9; object-fit: cover; }
-        .phone-frame { max-width: 260px; margin: 0 auto; aspect-ratio: 9 / 16; }
-        .phone-frame img { width: 100%; height: 100%; object-fit: cover; }
-        .device-info h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; color: #fff; }
-        .device-info p { color: #888; font-size: 14px; line-height: 1.6; margin: 0; }
+        /* Device Mockup Showcase Section */
+        .showcase-section { padding: 80px 20px; background: var(--bg); display: flex; justify-content: center; align-items: center; }
+        .showcase-container { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 60px; max-width: 1300px; width: 100%; }
+
+        /* TV Mockup Frame */
+        .tv-mockup { position: relative; width: 100%; max-width: 650px; background: #1a1a1a; border-radius: 16px; padding: 16px 16px 24px; box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(229,9,20,0.1); border: 2px solid #333; }
+        .tv-screen { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; border: 1px solid #111; }
+        .tv-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .tv-base { width: 160px; height: 14px; background: linear-gradient(to bottom, #222, #111); margin: 12px auto 0; border-radius: 4px; border: 1px solid #333; }
+        .tv-stand { width: 80px; height: 8px; background: #111; margin: 0 auto; border-radius: 2px; }
+
+        /* Phone Mockup Frame */
+        .phone-mockup { position: relative; width: 100%; max-width: 280px; background: #1a1a1a; border-radius: 40px; padding: 14px; box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(229,9,20,0.1); border: 3px solid #333; }
+        .phone-screen { width: 100%; aspect-ratio: 9 / 19.5; background: #000; border-radius: 30px; overflow: hidden; position: relative; border: 1px solid #111; }
+        .phone-screen::before { content: ""; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 90px; height: 16px; background: #111; border-radius: 10px; z-index: 10; }
+        .phone-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        @media (max-width: 768px) {
+            .showcase-container { gap: 40px; }
+            .tv-mockup { max-width: 100%; }
+            .phone-mockup { max-width: 240px; }
+        }
 
         /* FAQ Section */
         .faq-section { padding: 100px 20px; max-width: 800px; margin: auto; }
@@ -280,29 +287,22 @@
     </div>
 </section>
 
-<!-- Device Showcase Section -->
+<!-- Device Mockup Showcase Section -->
 <section class="showcase-section">
-    <h2 class="showcase-title">EXPERIENCIA MULTIDISPOSITIVO</h2>
-    <p class="showcase-subtitle">Disfruta de todo el entretenimiento con la máxima nitidez y rendimiento, optimizado tanto para Smart TV como para dispositivos móviles.</p>
-
-    <div class="showcase-grid">
-        <div class="device-card">
-            <div class="device-frame tv-frame">
-                <img src="https://raw.githubusercontent.com/NovaplayGO/novaimg/main/TVNOVA.jpg" alt="NovaPlay en Smart TV" loading="lazy">
+    <div class="showcase-container">
+        <!-- TV Mockup -->
+        <div class="device-mockup tv-mockup">
+            <div class="tv-screen">
+                <img src="https://raw.githubusercontent.com/NovaplayGO/novaimg/main/TVNOVA.jpg" alt="NovaPlay TV" loading="lazy">
             </div>
-            <div class="device-info">
-                <h3>Smart TV & TV Box</h3>
-                <p>Navegación ultrarrápida diseñada para el control remoto con reproducción en alta definición 4K.</p>
-            </div>
+            <div class="tv-base"></div>
+            <div class="tv-stand"></div>
         </div>
 
-        <div class="device-card">
-            <div class="device-frame phone-frame">
-                <img src="https://raw.githubusercontent.com/NovaplayGO/novaimg/main/PHONENOVA.jpg" alt="NovaPlay en Dispositivos Móviles" loading="lazy">
-            </div>
-            <div class="device-info">
-                <h3>Smartphones & Tablets</h3>
-                <p>Lleva tu plataforma favorita a todos lados con una interfaz táctil fluida y moderna.</p>
+        <!-- Phone Mockup -->
+        <div class="device-mockup phone-mockup">
+            <div class="phone-screen">
+                <img src="https://raw.githubusercontent.com/NovaplayGO/novaimg/main/PHONENOVA.jpg" alt="NovaPlay Mobile" loading="lazy">
             </div>
         </div>
     </div>
